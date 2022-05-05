@@ -7,7 +7,13 @@ on:
   pull_request:
     branches:
       - main, develop
+
+env:
+  ## Sets environment variable
+  SONAR_URL: https://sonarcloud.io/
+  SONAR_TOKEN: b79c681dea55925bb400c4528f3f6dcc97b3c4bf
   
+      
 jobs:
    sonarcloud:
     name: SonarCloud
