@@ -12,8 +12,8 @@ env:
   ## Sets environment variable
   SONAR_URL: https://sonarcloud.io/
   SONAR_TOKEN: b79c681dea55925bb400c4528f3f6dcc97b3c4bf
-
-
+  GITHUB_TOKEN: ${{secrets.TOKEN_GITHUB}}
+  
       
 jobs:
   sonarQubeTrigger:
@@ -30,6 +30,8 @@ jobs:
            -Dsonar.sources=$GITHUB_WORKSPACE 
            -Dsonar.host.url=${{ env.SONAR_URL }} 
            -Dsonar.login=${{ env.SONAR_TOKEN }}
+    env:
+      GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
 
   dependency_check:
     runs-on: ubuntu-latest
