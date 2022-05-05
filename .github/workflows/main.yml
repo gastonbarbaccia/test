@@ -5,6 +5,7 @@ on:
       - main
 env:
   GITHUB_TOKEN : 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
+  SONAR_TOKEN : b79c681dea55925bb400c4528f3f6dcc97b3c4bf
           
 jobs:
   sonarcloud:
@@ -18,4 +19,4 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ env.SONAR_TOKEN }}
