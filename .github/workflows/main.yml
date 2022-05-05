@@ -16,5 +16,5 @@ jobs:
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: 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  # Needed to get PR information, if any
+          SONAR_TOKEN: b79c681dea55925bb400c4528f3f6dcc97b3c4bf
