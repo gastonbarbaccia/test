@@ -53,17 +53,18 @@ jobs:
       name: Trivy Scan
       runs-on: ubuntu-18.04
       steps:
-        - name: Checkout code
-          uses: actions/checkout@v2
+      #  - name: Checkout code
+      #   uses: actions/checkout@v2
 
-        - name: Build an image from Dockerfile
-          run: |
-            docker build -t docker.io/my-organization/my-app:${{ github.sha }} .
+      # - name: Build an image from Dockerfile
+      #   run: |
+      #     docker build -t docker.io/my-organization/my-app:${{ github.sha }} .
 
         - name: Run Trivy vulnerability scanner
           uses: aquasecurity/trivy-action@master
           with:
-            image-ref: 'docker.io/my-organization/my-app:${{ github.sha }}'
+            #image-ref: 'docker.io/my-organization/my-app:${{ github.sha }}'
+            image-ref: 'docker.io/'
             format: 'sarif'
             output: 'trivy-results.sarif'
 
@@ -71,3 +72,12 @@ jobs:
           uses: github/codeql-action/upload-sarif@v1
           with:
             sarif_file: 'trivy-results.sarif'
+
+    zap_scan:
+    runs-on: ubuntu-latest
+    name: Scan ZAP website
+    steps:
+      - name: ZAP Scan
+        uses: zaproxy/action-baseline@v0.3.0
+        with:
+          target: 'https://www.zaproxy.org/'
