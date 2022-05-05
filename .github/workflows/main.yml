@@ -73,7 +73,7 @@ jobs:
           with:
             sarif_file: 'trivy-results.sarif'
 
-    zap_scan:
+  zap_scan:
     runs-on: ubuntu-latest
     name: Scan ZAP website
     steps:
