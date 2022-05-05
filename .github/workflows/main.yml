@@ -30,8 +30,7 @@ jobs:
            -Dsonar.sources=$GITHUB_WORKSPACE 
            -Dsonar.host.url=${{ env.SONAR_URL }} 
            -Dsonar.login=${{ env.SONAR_TOKEN }}
-      env:
-        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+       
 
   dependency_check:
     runs-on: ubuntu-latest
