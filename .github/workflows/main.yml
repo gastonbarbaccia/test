@@ -1,3 +1,4 @@
+
 name: Code Scanning
 
 on:
@@ -7,15 +8,21 @@ on:
   pull_request:
     branches:
       - main, develop
-
-env:
-  ## Sets environment variable
-  SONAR_URL: https://sonarcloud.io/
-  SONAR_TOKEN: b79c681dea55925bb400c4528f3f6dcc97b3c4bf
-  GITHUB_TOKEN: ${{ github.token }}
   
-      
 jobs:
+   sonarcloud:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ env.SONAR_URL }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ env.SONAR_TOKEN }}
+
   sonarQubeTrigger:
     name: SonarQube Scan
     runs-on: ubuntu-latest
