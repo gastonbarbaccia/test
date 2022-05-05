@@ -1,16 +1,9 @@
-name: Code Scanning
+name: Build
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main, develop
+on: [push]
 
- 
 jobs:
-   sonarcloud:
+  sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
     steps:
@@ -20,66 +13,5 @@ jobs:
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.SONAR_URL }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.SONARCLOUD_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-  sonarQubeTrigger:
-    name: SonarQube Scan
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@master
-    - name: Setup sonarqube
-      uses: warchant/setup-sonar-scanner@v3
-    - name: Run sonarqube
-      run: sonar-scanner
-           -Dsonar.organization=gastonbarbaccia 
-           -Dsonar.projectKey=test
-           -Dsonar.sources=$GITHUB_WORKSPACE 
-           -Dsonar.host.url=${{ env.SONAR_URL }} 
-           -Dsonar.login=${{ env.SONAR_TOKEN }}
-       
-
-  dependency_check:
-    runs-on: ubuntu-latest
-    name: Dependency check Scan
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Depcheck
-        uses: dependency-check/Dependency-Check_Action@main
-        id: Depcheck
-        with:
-          project: 'test'
-          path: '.'
-          format: 'HTML'    
-          args: >
-            --failOnCVSS 7
-            --enableRetired
-      - name: Upload Test results
-        uses: actions/upload-artifact@master
-        with:
-           name: Depcheck report
-           path: ${{github.workspace}}/reports
-
-  trivy:
-      name: Trivy Scan
-      runs-on: ubuntu-18.04
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v2
-
-        - name: Build an image from Dockerfile
-          run: |
-            docker build -t docker.io/my-organization/my-app:${{ github.sha }} .
-
-        - name: Run Trivy vulnerability scanner
-          uses: aquasecurity/trivy-action@master
-          with:
-            image-ref: 'docker.io/my-organization/my-app:${{ github.sha }}'
-            format: 'sarif'
-            output: 'trivy-results.sarif'
-
-        - name: Upload Trivy scan results to GitHub Security tab
-          uses: github/codeql-action/upload-sarif@v1
-          with:
-            sarif_file: 'trivy-results.sarif'
