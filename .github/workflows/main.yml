@@ -12,7 +12,7 @@ env:
   ## Sets environment variable
   SONAR_URL: https://sonarcloud.io/
   SONAR_TOKEN: b79c681dea55925bb400c4528f3f6dcc97b3c4bf
-  GITHUB_TOKEN: ${{secrets.TOKEN_GITHUB}}
+  GITHUB_TOKEN: ${{ github.token }}
   
       
 jobs:
