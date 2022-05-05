@@ -24,8 +24,8 @@ jobs:
       uses: warchant/setup-sonar-scanner@v3
     - name: Run sonarqube
       run: sonar-scanner
-           -Dsonar.organization=1corp 
-           -Dsonar.projectKey=Claro-Club-Mobile 
+           -Dsonar.organization=gastonbarbaccia 
+           -Dsonar.projectKey=test
            -Dsonar.sources=$GITHUB_WORKSPACE 
            -Dsonar.host.url=${{ env.SONAR_URL }} 
            -Dsonar.login=${{ env.SONAR_TOKEN }}
