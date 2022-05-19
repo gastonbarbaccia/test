@@ -50,7 +50,7 @@ jobs:
            path: ${{github.workspace}}/reports
 
   trivy:
-    name: scan trivy
+    name: Scan trivy
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout code
@@ -58,12 +58,12 @@ jobs:
       
       - name: Build an image from Dockerfile
         run: |
-          docker build .
+          docker build -t gastonbarbaccia/test_v1 .
       
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: '.'
+          image-ref: 'gastonbarbaccia/test_v1'
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
