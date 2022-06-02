@@ -71,7 +71,7 @@ jobs:
                               --form "active=\"true\"" \
                               --form "verified=\"false\"" \
                               --form "scan_type=\"SonarQube API Import\"" \
-                              --form "engagement_name=\"Sonarqube Github\"" \
+                              --form "engagement_name=\"SonarqubeGithub\"" \
                               --form "close_old_findings=\"true\"" \
                               --form "product_name=\"gastonbarbaccia-test\"" \
                               --form "scan_type=\"SonarQube API Import\"" \
