@@ -45,6 +45,7 @@ jobs:
           target_start: ''
           target_end: ''
           product: 3
+          engagement_type: CI/CD
       - name: Show response
         run: |
           set -e
