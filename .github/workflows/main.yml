@@ -32,22 +32,5 @@ jobs:
           host: ${{ env.SONAR_SERVER }} 
           token: ${{ env.SONAR_TOKEN }} 
           
-      - name: Create new engagement
-        id: engagements
-        uses: ivanamat/defectdojo-engagements@v1
-        with:
-          token: 0dfc2ae06f011369f4eefbcf3e067efb9627ce09
-          defectdojo_url: http://ec2-3-135-244-217.us-east-2.compute.amazonaws.com:8080/
-          defectdojo_endpoint:  http://ec2-3-135-244-217.us-east-2.compute.amazonaws.com:8080/api/v2/engagements/
-          name: gastonbarbaccia-test
-          description: gastonbarbaccia-test
-          version: ''
-          target_start: ''
-          target_end: ''
-          product: 3
-          engagement_type: CI/CD
-      - name: Show response
-        run: |
-          set -e
-          printf '%s\n' '${{ steps.engagements.outputs.response }}'
+
       
