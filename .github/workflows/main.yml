@@ -12,6 +12,7 @@ env:
   GITHUB_TOKEN : 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
   SONAR_TOKEN : 1affd398034bd9c7d0049bcdef6fbdc624b51344
   SONAR_SERVER : http://ec2-3-135-236-218.us-east-2.compute.amazonaws.com:9000
+  DEFECT_DOJO_TOKEN: 0dfc2ae06f011369f4eefbcf3e067efb9627ce09
       
 jobs:
   SonarScanner:
