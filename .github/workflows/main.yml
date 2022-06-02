@@ -55,7 +55,6 @@ jobs:
                         "product": 3
                         }'
 
-    
   PublishFindingsSonar:
           name: Publish findings Sonarqube
           runs-on: ubuntu-latest
@@ -65,7 +64,8 @@ jobs:
               with:
                   image: curlimages/curl
                   run: | 
-                        curl X POST "http://ec2-3-135-244-217.us-east-2.compute.amazonaws.com:8080/import-scan/" \
+                        curl X POST \
+                        'http://ec2-3-135-244-217.us-east-2.compute.amazonaws.com:8080/import-scan/' \
                         --header "Authorization: Token 0dfc2ae06f011369f4eefbcf3e067efb9627ce09" \
                         --form "scan_date=\"2022-06-02\"" \
                         --form "minimum_severity=\"Info\"" \
@@ -76,5 +76,7 @@ jobs:
                         --form "close_old_findings=\"true\"" \
                         --form "product_name=\"gastonbarbaccia-test\"" \
                         --form "environment=\"Default\""
+
+
 
 
