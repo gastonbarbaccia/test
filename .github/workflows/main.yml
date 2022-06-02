@@ -66,16 +66,18 @@ jobs:
                   run: | 
                         curl X POST \
                         'http://ec2-3-135-244-217.us-east-2.compute.amazonaws.com:8080/import-scan/' \
-                        --header "Authorization: Token 0dfc2ae06f011369f4eefbcf3e067efb9627ce09" \
-                        --form "scan_date=\"2022-06-02\"" \
-                        --form "minimum_severity=\"Info\"" \
-                        --form "active=\"true\"" \
-                        --form "verified=\"false\"" \
-                        --form "scan_type=\"SonarQube API Import\"" \
-                        --form "engagement_name=\"Sonarqube Github\"" \
-                        --form "close_old_findings=\"true\"" \
-                        --form "product_name=\"gastonbarbaccia-test\"" \
-                        --form "environment=\"Default\""
+                        -H 'Authorization: Token 0dfc2ae06f011369f4eefbcf3e067efb9627ce09' \
+                        -d '{
+                        "scan_date": "2022-06-02", 
+                        "minimum_severity"="Info",
+                        "active"="true",
+                        "verified"="false",
+                        "scan_type"="SonarQube API Import",
+                        "engagement_name"="Sonarqube Github",
+                        "close_old_findings"="true",
+                        "product_name"="gastonbarbaccia-test",
+                        "environment"="Default"
+                        }'
 
 
 
