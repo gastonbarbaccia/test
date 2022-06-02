@@ -48,7 +48,7 @@ jobs:
                         -H 'X-CSRFTOKEN: tJY9NWtnlqurzkvzn9R4y0uK6TOV5W2gHEU2qllNpdsaQEsd3vC9zrOtpbabmHTZ' \
                         -H "Authorization: Token 0dfc2ae06f011369f4eefbcf3e067efb9627ce09" \
                         -d '{
-                        "name":"Sonarqube Github",
+                        "name":"SonarqubeGithub",
                         "engagement_type": "CI/CD",
                         "target_start": "2022-06-02",
                         "target_end": "2022-06-02",
