@@ -11,20 +11,25 @@ on:
 env:
   GITHUB_TOKEN : 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
   SONAR_TOKEN : b79c681dea55925bb400c4528f3f6dcc97b3c4bf
-      
+  SONAR_SERVER : http://ec2-3-135-236-218.us-east-2.compute.amazonaws.com:9000
+  
 jobs:
-  sonarcloud:
-    name: SonarCloud
+  SonarScanner:
     runs-on: ubuntu-latest
+    name: Sonar Scanner
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ env.SONAR_TOKEN }}
+          fetch-depth: 0
+      - name: Install dependencies
+        run: yarn install --production=false
+      - name: Scan code
+        uses: vtex/action-sonarqube@main
+        with:
+          githubToken: ${{ env.GITHUB_TOKEN }} # https://docs.github.com/en/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
+          host: ${{ env.SONAR_SERVER }} # Variable set in the Github Secrets
+          token: ${{ env.SONAR_TOKEN }} # Variable set in the Github Secrets
        
 
   dependency_check:
