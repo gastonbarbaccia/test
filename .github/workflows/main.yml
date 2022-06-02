@@ -10,7 +10,7 @@ on:
 
 env:
   GITHUB_TOKEN : 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
-  SONAR_TOKEN : b79c681dea55925bb400c4528f3f6dcc97b3c4bf
+  SONAR_TOKEN : 1affd398034bd9c7d0049bcdef6fbdc624b51344
   SONAR_SERVER : http://ec2-3-135-236-218.us-east-2.compute.amazonaws.com:9000
   
 jobs:
