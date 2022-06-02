@@ -32,5 +32,27 @@ jobs:
           host: ${{ env.SONAR_SERVER }} 
           token: ${{ env.SONAR_TOKEN }} 
           
+  compile:
+          name: Compile site assets
+          runs-on: ubuntu-latest
+          steps:
+            - name: Run the build process with Docker
+              uses: addnab/docker-run-action@v3
+              with:
+                  image: curlimages/curl
+                  run: | 
+                        curl -X 'POST' \
+                        'http://ec2-3-135-244-217.us-east-2.compute.amazonaws.com:8080/api/v2/engagements/' \
+                        -H 'accept: application/json' \
+                        -H 'Content-Type: application/json' \
+                        -H 'X-CSRFTOKEN: tJY9NWtnlqurzkvzn9R4y0uK6TOV5W2gHEU2qllNpdsaQEsd3vC9zrOtpbabmHTZ' \
+                        -H "Authorization: Token 0dfc2ae06f011369f4eefbcf3e067efb9627ce09" \
+                        -d '{
+                        "name":"Sonarqube Github",
+                        "engagement_type": "CI/CD",
+                        "target_start": "2022-06-02",
+                        "target_end": "2022-06-02",
+                        "product": 3
+                        }'
 
       
