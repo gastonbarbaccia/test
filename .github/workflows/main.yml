@@ -101,7 +101,6 @@ jobs:
         with:
            name: Depcheck report
            path: ${{github.workspace}}/reports
-      - uses: actions/checkout@v1
       - run: |
           ls
 
