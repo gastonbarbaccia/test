@@ -147,7 +147,7 @@ jobs:
                         "verified": "false",
                         "scan_date": "2022-06-02",
                         "scan_type": "Dependency Check Scan",
-                        "product_name": "gastonbarbaccia-test",
+                        "product_name": 'gastonbarbaccia-test',
                         "file": "@dependency-check-report.xml;type=text/xml",
                         "engagement_name": "DependencyCheckGithub",
                         "close_old_findings": "true",
