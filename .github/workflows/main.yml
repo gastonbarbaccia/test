@@ -92,7 +92,7 @@ jobs:
         with:
           project: 'test'
           path: '.'
-          format: 'HTML'    
+          format: 'XML'    
           args: >
             --failOnCVSS 7
             --enableRetired
@@ -126,6 +126,24 @@ jobs:
                         "product": 3
                         }'
 
+  PublishFindingsDependencyCheck:
+          name: Publish findings Dependency Check
+          runs-on: ubuntu-latest
+          needs: EngagementSonarqube
+          steps:
+            - name: Run the build process with Docker
+              uses: addnab/docker-run-action@v3
+              with:
+                  image: curlimages/curl
+                  run: |
+                        curl -X POST "http://ec2-3-135-244-217.us-east-2.compute.amazonaws.com:8080/api/v2/import-scan/" \
+                        -H  "accept: application/json" -H  "Content-Type: multipart/form-data" -\
+                        -H  "X-CSRFToken: ujMSwx6OazuMFYFeovC7SFWNZ4MeCRS7dqRYTlAHYXBDCGvw5aoC2iWR9m5UCwts" \
+                        -H "Authorization: Token 0dfc2ae06f011369f4eefbcf3e067efb9627ce09" -F "scan_date=2022-06-02" \
+                        -F "minimum_severity=Info" -F "active=true" -F "verified=false" -F "scan_type=Dependency Check Scan" \
+                        -F "product_name=gastonbarbaccia-test" -F "file=@dependency-check-report.xml;type=text/xml" \
+                        -F "engagement_name=DependencyCheckGithub" -F "close_old_findings=true" -F "push_to_jira=false"
+
   trivy:
     name: Scan trivy
     runs-on: ubuntu-18.04
@@ -146,28 +164,28 @@ jobs:
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
-  
+
   EngagementTrivy:
-      name: Create engagement Trivy
-      runs-on: ubuntu-latest
-      needs: trivy
-      steps:
-            - name: Run the build process with Docker
-              uses: addnab/docker-run-action@v3
-              with:
-                  image: curlimages/curl
-                  run: | 
-                        curl -X 'POST' \
-                        'http://ec2-3-135-244-217.us-east-2.compute.amazonaws.com:8080/api/v2/engagements/' \
-                        -H 'accept: application/json' \
-                        -H 'Content-Type: application/json' \
-                        -H 'X-CSRFTOKEN: tJY9NWtnlqurzkvzn9R4y0uK6TOV5W2gHEU2qllNpdsaQEsd3vC9zrOtpbabmHTZ' \
-                        -H "Authorization: Token 0dfc2ae06f011369f4eefbcf3e067efb9627ce09" \
-                        -d '{
-                        "name":"TrivyGithub",
-                        "engagement_type": "CI/CD",
-                        "target_start": "2022-06-02",
-                        "target_end": "2022-06-02",
-                        "product": 3
-                        }'
+          name: Create engagement Trivy
+          runs-on: ubuntu-latest
+          needs: trivy
+          steps:
+                - name: Run the build process with Docker
+                  uses: addnab/docker-run-action@v3
+                  with:
+                      image: curlimages/curl
+                      run: | 
+                            curl -X 'POST' \
+                            'http://ec2-3-135-244-217.us-east-2.compute.amazonaws.com:8080/api/v2/engagements/' \
+                            -H 'accept: application/json' \
+                            -H 'Content-Type: application/json' \
+                            -H 'X-CSRFTOKEN: tJY9NWtnlqurzkvzn9R4y0uK6TOV5W2gHEU2qllNpdsaQEsd3vC9zrOtpbabmHTZ' \
+                            -H "Authorization: Token 0dfc2ae06f011369f4eefbcf3e067efb9627ce09" \
+                            -d '{
+                            "name":"TrivyGithub",
+                            "engagement_type": "CI/CD",
+                            "target_start": "2022-06-02",
+                            "target_end": "2022-06-02",
+                            "product": 3
+                            }'
 
