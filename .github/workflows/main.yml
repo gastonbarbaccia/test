@@ -142,16 +142,16 @@ jobs:
                         -H 'X-CSRFToken: ujMSwx6OazuMFYFeovC7SFWNZ4MeCRS7dqRYTlAHYXBDCGvw5aoC2iWR9m5UCwts' \
                         -H "Authorization: Token 0dfc2ae06f011369f4eefbcf3e067efb9627ce09" \
                         -d '{
-                        "minimum_severity=Info",
-                        "active=true",
-                        "verified=false",
-                        "scan_date=2022-06-02",
-                        "scan_type=Dependency Check Scan",
-                        "product_name=gastonbarbaccia-test",
-                        "file=@dependency-check-report.xml;type=text/xml",
-                        "engagement_name=DependencyCheckGithub",
-                        "close_old_findings=true",
-                        "push_to_jira=false"
+                        "minimum_severity":"Info",
+                        "active":"true",
+                        "verified":"false",
+                        "scan_date":"2022-06-02",
+                        "scan_type":"Dependency Check Scan",
+                        "product_name":"gastonbarbaccia-test",
+                        "file":"@dependency-check-report.xml;type=text/xml",
+                        "engagement_name":"DependencyCheckGithub",
+                        "close_old_findings":"true",
+                        "push_to_jira":"false"
                         }'
 
   trivy:
