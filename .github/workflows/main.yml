@@ -138,7 +138,7 @@ jobs:
                   run: |
                         curl -X POST 'http://ec2-3-135-244-217.us-east-2.compute.amazonaws.com:8080/api/v2/import-scan/' \
                         -H 'accept: application/json' \
-                        -H 'Content-Type: multipart/form-data' \
+                        -H 'Content-Type: multipart/form-data;boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW' \
                         -H 'X-CSRFToken: ujMSwx6OazuMFYFeovC7SFWNZ4MeCRS7dqRYTlAHYXBDCGvw5aoC2iWR9m5UCwts' \
                         -H "Authorization: Token 0dfc2ae06f011369f4eefbcf3e067efb9627ce09" \
                         -d '{
