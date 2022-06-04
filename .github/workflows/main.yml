@@ -247,7 +247,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: Staging
     steps:
-      - name: Trigger Acuneitx Scan
+      - name: Trigger Acunetix Scan
         run: |
               curl -k -i --request POST --url "https://3.134.174.38:3443/api/v1/scans" \
               --header "X-Auth: 1986ad8c0a5b3df4d7028d5f3c06e936c6ee269ab7bdc496db893bb19e349b85b" --header "content-type: application/json" \
