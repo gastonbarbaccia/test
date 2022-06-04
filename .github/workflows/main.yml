@@ -178,7 +178,7 @@ jobs:
         uses: actions/upload-artifact@master
         with:
            name: Container report
-           path: ${{github.workspace}}/reports
+           path: trivy-results.json
 
   EngagementTrivy:
           name: Create engagement Trivy
