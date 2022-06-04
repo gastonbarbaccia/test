@@ -241,3 +241,4 @@ jobs:
           heroku_app_name: "devsecops-test"
           heroku_email: "gastonbarbaccia@hotmail.com"
           branch: develop
+          dontuseforce: true
