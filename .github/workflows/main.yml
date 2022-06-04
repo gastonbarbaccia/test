@@ -240,5 +240,3 @@ jobs:
           heroku_api_key: "65817ae2-fa72-49ce-8baf-476e80324340"
           heroku_app_name: "devsecops-test"
           heroku_email: "gastonbarbaccia@hotmail.com"
-          #branch: develop
-          #dontuseforce: true
