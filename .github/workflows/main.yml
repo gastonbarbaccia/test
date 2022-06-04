@@ -230,7 +230,6 @@ jobs:
 #                    -F "close_old_findings=true" \
 #                    -F "push_to_jira=false"
 
-
   Staging:
     runs-on: ubuntu-latest
     #needs: [PublishFindingsSonar, PublishFindingsDependencyCheck,PublishFindingsTrivy]
