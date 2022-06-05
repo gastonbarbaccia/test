@@ -88,7 +88,7 @@ jobs:
                     -F "verified=false" \
                     -F "scan_type=ZAP Scan" \
                     -F "product_name=gastonbarbaccia-test" \
-                    -F "file=@report_xml.xml;type=text/xml" \
+                    -F "file=@/zap/wrk/report_xml.xml;type=text/xml" \
                     -F "engagement_name=ZapProxyGithub" \
                     -F "close_old_findings=true" \
                     -F "push_to_jira=false"
