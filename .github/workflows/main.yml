@@ -313,7 +313,7 @@ jobs:
                     -F "verified=false" \
                     -F "scan_type=Trivy Scan" \
                     -F "product_name=gastonbarbaccia-test" \
-                    -F "file=@report_zap.xml;type=text/xml" \
+                    -F "file=@zap_scan/report_zap.html;type=text/html" \
                     -F "engagement_name=ZapProxyGithub" \
                     -F "close_old_findings=true" \
                     -F "push_to_jira=false"
