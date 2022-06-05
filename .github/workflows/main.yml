@@ -40,9 +40,12 @@ jobs:
     steps:
       - uses: addnab/docker-run-action@v3
         with:
-          image: docker:latest
+          image: owasp/zap2docker-stable
           run: |
-                docker run -t -v $(pwd):/zap/wrk/:rw --user root owasp/zap2docker-stable zap-full-scan.py -t https://devsecops-test.herokuapp.com -x report_xml.xml
+                mkdir /zap/wrk
+                /zap/zap-baseline.py -t https://devsecops-test.herokuapp.com -x report_zap.xml || true
+                cp /zap/wrk/report_zap.xml .
+
       - name: Upload Test results
         uses: actions/upload-artifact@master
         with:
@@ -93,7 +96,7 @@ jobs:
                     -F "verified=false" \
                     -F "scan_type=ZAP Scan" \
                     -F "product_name=gastonbarbaccia-test" \
-                    -F "file=@/zap/wrk/report_xml.xml;type=text/xml" \
+                    -F "file=@report_zap.xml;type=text/xml" \
                     -F "engagement_name=ZapProxyGithub" \
                     -F "close_old_findings=true" \
                     -F "push_to_jira=false"
