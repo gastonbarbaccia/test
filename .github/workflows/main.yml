@@ -266,7 +266,7 @@ jobs:
       uses: zaproxy/action-full-scan@v0.4.0
       with:
         target: 'https://www.zaproxy.org/'
-        cmd_options: '-x report_zap.xml'
+
 
   EngagementZapProxy:
           name: Create engagement Zap Proxy
@@ -299,7 +299,7 @@ jobs:
           steps:
             - uses: actions/download-artifact@v2
               with:
-                name: Container report
+                name: ZAP Scan
             - name: Upload report
               run: |
                     curl -X POST '${{ env.DEFECTDOJO_SERVER }}/api/v2/import-scan/' \
