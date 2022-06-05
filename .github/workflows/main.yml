@@ -277,7 +277,7 @@ jobs:
   EngagementZapProxy:
           name: Create engagement Zap Proxy
           runs-on: ubuntu-latest
-          needs: DAST
+          needs: zap_scan
           steps:
                 - name: Run the build process with Docker
                   uses: addnab/docker-run-action@v3
@@ -314,7 +314,7 @@ jobs:
                     -F "minimum_severity=Info" \
                     -F "active=true" \
                     -F "verified=false" \
-                    -F "scan_type=Trivy Scan" \
+                    -F "scan_type=ZAP Scan" \
                     -F "product_name=gastonbarbaccia-test" \
                     -F "file=@report_xml;type=text/xml" \
                     -F "engagement_name=ZapProxyGithub" \
