@@ -257,15 +257,21 @@ jobs:
 #                "user_authorized_to_scan":"yes", "target_id":"2dd62018-1b5f-445c-882a-28a4da07e76e"
 #                }'
 
-  DAST:
-    name: Zap Proxy
+  zap_scan:
     runs-on: ubuntu-latest
+    name: Scan the webapplication
     needs: Staging
     steps:
-    - name: ZAP Scan
-      uses: zaproxy/action-full-scan@v0.4.0
-      with:
-        target: 'https://devsecops-test.herokuapp.com'
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: master
+      - name: ZAP Scan
+        uses: zaproxy/action-full-scan@v0.4.0
+        with:
+          docker_name: 'owasp/zap2docker-stable'
+          target: 'https://devsecops-test.herokuapp.com'
+          cmd_options: '-x report_xml'
 
 
   EngagementZapProxy:
@@ -310,7 +316,7 @@ jobs:
                     -F "verified=false" \
                     -F "scan_type=Trivy Scan" \
                     -F "product_name=gastonbarbaccia-test" \
-                    -F "file=@zap_scan/report_zap.html;type=text/html" \
+                    -F "file=@report_xml;type=text/xml" \
                     -F "engagement_name=ZapProxyGithub" \
                     -F "close_old_findings=true" \
                     -F "push_to_jira=false"
