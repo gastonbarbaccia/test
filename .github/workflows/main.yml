@@ -20,13 +20,9 @@ env:
 jobs:
   zap_scan:
       runs-on: ubuntu-latest
-      name: Scan ZAP website
+      name: Test
       continue-on-error: true
       steps:
-        - name: ZAP Scan
-          uses: gastonbarbaccia/zapproxy@v0.1.1
-          with:
-            target: 'https://devsecops-test.herokuapp.com/'
         - name: Get Branch
           id: branch
           run: echo "git_branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_BRANCH
