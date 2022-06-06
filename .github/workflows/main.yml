@@ -51,6 +51,8 @@ jobs:
         with:
            name: ZAP report
            path: ./report_zap.xml
+           run: |
+                ls
 
 
 
