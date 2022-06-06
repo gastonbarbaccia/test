@@ -258,3 +258,68 @@ jobs:
                 "schedule":{"disable":false,"start_date":null,"time_sensitive":false}, 
                 "user_authorized_to_scan":"yes", "target_id":"2dd62018-1b5f-445c-882a-28a4da07e76e"
                 }'
+
+  mobsfscan:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: mobsfscan
+      uses: MobSF/mobsfscan@main
+      with:
+        args: '. --json --output results_mobile.json'
+    - uses: actions/upload-artifact@v3
+      with:
+        name: mobsfscan_results
+        path: results_mobile.json
+
+  EngagementMobsfscan:
+          name: Create engagement Mobsfscan
+          runs-on: ubuntu-latest
+          needs: mobsfscan
+          steps:
+            - name: Run the build process with Docker
+              uses: addnab/docker-run-action@v3
+              with:
+                  image: curlimages/curl
+                  run: | 
+                        curl -X 'POST' \
+                        '${{ env.DEFECTDOJO_SERVER }}/api/v2/engagements/' \
+                        -H 'accept: application/json' \
+                        -H 'Content-Type: application/json' \
+                        -H 'X-CSRFTOKEN: tJY9NWtnlqurzkvzn9R4y0uK6TOV5W2gHEU2qllNpdsaQEsd3vC9zrOtpbabmHTZ' \
+                        -H "Authorization: Token 0dfc2ae06f011369f4eefbcf3e067efb9627ce09" \
+                        -d '{
+                        "name":"MobsfscanGithub",
+                        "engagement_type": "CI/CD",
+                        "target_start": "2022-06-02",
+                        "target_end": "2022-06-02",
+                        "product": 3
+                        }'
+
+
+  PublishFindingsMobsfscan:
+          name: Publish findings Mobsfscan
+          runs-on: ubuntu-latest
+          needs: EngagementMobsfscan
+          steps:
+            - uses: actions/download-artifact@v2
+              with:
+                name: mobsfscan_results
+            - name: Upload report
+              run: |
+                    curl -X POST '${{ env.DEFECTDOJO_SERVER }}/api/v2/import-scan/' \
+                    -H  "accept: application/json" \
+                    -H  "Content-Type: multipart/form-data" \
+                    -H  "X-CSRFToken: ujMSwx6OazuMFYFeovC7SFWNZ4MeCRS7dqRYTlAHYXBDCGvw5aoC2iWR9m5UCwts" \
+                    -H "Authorization: Token 0dfc2ae06f011369f4eefbcf3e067efb9627ce09" \
+                    -F "scan_date=2022-06-02" \
+                    -F "minimum_severity=Info" \
+                    -F "active=true" \
+                    -F "verified=false" \
+                    -F "scan_type=Mobsfscan Scan" \
+                    -F "product_name=gastonbarbaccia-test" \
+                    -F "file=@results_mobile.json;type=text/json" \
+                    -F "engagement_name=MobsfscanGithub" \
+                    -F "close_old_findings=true" \
+                    -F "push_to_jira=false"
+                    
