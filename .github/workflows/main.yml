@@ -29,6 +29,6 @@ jobs:
         args: '. --json --output results_mobile.json'
     - uses: actions/upload-artifact@v3
       with:
-        name: my-artifact
+        name: mobsfscan_results
         path: results_mobile.json
 
