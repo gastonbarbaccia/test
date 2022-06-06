@@ -27,8 +27,16 @@ jobs:
           uses: gastonbarbaccia/zapproxy@v0.1.1
           with:
             target: 'https://devsecops-test.herokuapp.com/'
-        - name: Branch SHA
-        - run: |
-                BRANCH_NAME=$(echo $GITHUB_REF | cut -d'/' -f 3)
-                GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c1-7)
-                echo BRANCH_NAME_GITHUB_SHA_SHORT
+        - name: Get Branch
+          id: branch
+          run: echo "git_branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_BRANCH
+
+        - name: Check Branch
+          run: echo "${{ env.branch }}"
+
+        - name: Get Hash
+          id: hash
+          run: echo "git_hash=$(git rev-parse --short "$GITHUB_SHA")" >> $GITHUB_HASH
+
+        - name: Check Hash
+          run: echo "${{ env.hash }}"
