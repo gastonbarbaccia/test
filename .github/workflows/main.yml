@@ -14,6 +14,7 @@ env:
   GITHUB_TOKEN : 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
   SONAR_TOKEN : 1affd398034bd9c7d0049bcdef6fbdc624b51344
   SONAR_SERVER : http://ec2-3-20-205-255.us-east-2.compute.amazonaws.com:9000
+  DEFECTDOJO_SERVER : http://ec2-13-59-51-42.us-east-2.compute.amazonaws.com:8080
       
 jobs:
   SonarScanner:
@@ -45,7 +46,7 @@ jobs:
                   image: curlimages/curl
                   run: | 
                         curl -X 'POST' \
-                        'http://ec2-13-59-51-42.us-east-2.compute.amazonaws.com:8080/api/v2/engagements/' \
+                        '${{ env.DEFECTDOJO_SERVER }}/api/v2/engagements/' \
                         -H 'accept: application/json' \
                         -H 'Content-Type: application/json' \
                         -H 'X-CSRFTOKEN: tJY9NWtnlqurzkvzn9R4y0uK6TOV5W2gHEU2qllNpdsaQEsd3vC9zrOtpbabmHTZ' \
@@ -68,7 +69,7 @@ jobs:
               with:
                   image: curlimages/curl
                   run: |
-                        curl --request POST "http://ec2-13-59-51-42.us-east-2.compute.amazonaws.com:8080/api/v2/import-scan/" \
+                        curl --request POST "${{ env.DEFECTDOJO_SERVER }}/api/v2/import-scan/" \
                               --header "Authorization: Token 0dfc2ae06f011369f4eefbcf3e067efb9627ce09" \
                               --form "scan_date=\"2022-06-02\"" \
                               --form "minimum_severity=\"Info\"" \
@@ -117,7 +118,7 @@ jobs:
                   image: curlimages/curl
                   run: | 
                         curl -X 'POST' \
-                        'http://ec2-13-59-51-42.us-east-2.compute.amazonaws.com:8080/api/v2/engagements/' \
+                        '${{ env.DEFECTDOJO_SERVER }}/api/v2/engagements/' \
                         -H 'accept: application/json' \
                         -H 'Content-Type: application/json' \
                         -H 'X-CSRFTOKEN: tJY9NWtnlqurzkvzn9R4y0uK6TOV5W2gHEU2qllNpdsaQEsd3vC9zrOtpbabmHTZ' \
@@ -140,7 +141,7 @@ jobs:
                 name: Depcheck report
             - name: Upload report
               run: |
-                    curl -X POST 'http://ec2-13-59-51-42.us-east-2.compute.amazonaws.com:8080/api/v2/import-scan/' \
+                    curl -X POST '${{ env.DEFECTDOJO_SERVER }}/api/v2/import-scan/' \
                     -H  "accept: application/json" \
                     -H  "Content-Type: multipart/form-data" \
                     -H  "X-CSRFToken: ujMSwx6OazuMFYFeovC7SFWNZ4MeCRS7dqRYTlAHYXBDCGvw5aoC2iWR9m5UCwts" \
@@ -191,7 +192,7 @@ jobs:
                       image: curlimages/curl
                       run: | 
                             curl -X 'POST' \
-                            'http://ec2-13-59-51-42.us-east-2.compute.amazonaws.com:8080/api/v2/engagements/' \
+                            '${{ env.DEFECTDOJO_SERVER }}/api/v2/engagements/' \
                             -H 'accept: application/json' \
                             -H 'Content-Type: application/json' \
                             -H 'X-CSRFTOKEN: tJY9NWtnlqurzkvzn9R4y0uK6TOV5W2gHEU2qllNpdsaQEsd3vC9zrOtpbabmHTZ' \
@@ -214,7 +215,7 @@ jobs:
                 name: Container report
             - name: Upload report
               run: |
-                    curl -X POST 'http://ec2-13-59-51-42.us-east-2.compute.amazonaws.com:8080/api/v2/import-scan/' \
+                    curl -X POST '${{ env.DEFECTDOJO_SERVER }}/api/v2/import-scan/' \
                     -H  "accept: application/json" \
                     -H  "Content-Type: multipart/form-data" \
                     -H  "X-CSRFToken: ujMSwx6OazuMFYFeovC7SFWNZ4MeCRS7dqRYTlAHYXBDCGvw5aoC2iWR9m5UCwts" \
