@@ -5,10 +5,12 @@ on:
     branches:
       - main
       - develop
+      - mobfscan
   pull_request:
     branches:
       - main
       - develop
+      - mobfscan
 
 env:
   GITHUB_TOKEN : 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
