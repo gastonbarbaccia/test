@@ -27,3 +27,8 @@ jobs:
           uses: gastonbarbaccia/zapproxy@v0.1.1
           with:
             target: 'https://devsecops-test.herokuapp.com/'
+        - name: Branch SHA
+        - run: |
+                BRANCH_NAME=$(echo $GITHUB_REF | cut -d'/' -f 3)
+                GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c1-7)
+                echo BRANCH_NAME_GITHUB_SHA_SHORT
