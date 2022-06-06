@@ -44,7 +44,7 @@ jobs:
           docker_name: 'owasp/zap2docker-stable'
           target: 'https://devsecops-test.herokuapp.com'
           rules_file_name: '.zap/rules.tsv'
-          cmd_options: '-x report_zap.xml'
+          cmd_options: '-x report_zap.xml --user root'
 
 
 
