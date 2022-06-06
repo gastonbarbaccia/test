@@ -186,7 +186,7 @@ jobs:
                     -F "scan_type=Dependency Check Scan" \
                     -F "product_name=gastonbarbaccia-test" \
                     -F "file=@dependency-check-report.xml;type=text/xml" \
-                    -F "engagement_name=DependencyCheckGithub_#${{ steps.vars.outputs.sha_short }}_${{ steps.vars.outputs.branch }}"" \
+                    -F "engagement_name=DependencyCheckGithub_#${{ steps.vars.outputs.sha_short }}_${{ steps.vars.outputs.branch }}" \
                     -F "close_old_findings=true" \
                     -F "push_to_jira=false"
                     
