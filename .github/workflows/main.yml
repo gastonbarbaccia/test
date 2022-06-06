@@ -24,8 +24,7 @@ jobs:
 #      continue-on-error: true
       steps:
         - name: ZAP Scan
-          uses: zaproxy/action-full-scan@v0.4.0
+          uses: gastonbarbaccia/zapproxy@v0.1.0
           with:
             target: 'https://devsecops-test.herokuapp.com/'
-            cmd_options: '-x report_xml.xml'
             
