@@ -26,5 +26,5 @@ jobs:
     - name: mobsfscan
       uses: MobSF/mobsfscan@main
       with:
-        args: 'src/ --json --output results_mobile.json'
+        args: '. --json --output results_mobile.json'
 
