@@ -24,15 +24,15 @@ jobs:
       continue-on-error: true
       steps:
         - uses: actions/checkout@v1
+        - name: Add SHORT_SHA env property with commit short sha
+          run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
+        - name: My step 1
+          run: echo Test1_${SHORT_SHA}
 
-        - name: Declare some variables
-          id: vars
-          shell: bash
-          run: |
-            echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-            echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
-
-        - name: Another step
-          run: |
-            echo "Branch: ${{ steps.vars.outputs.branch }}"
-            echo "Sha: ${{ steps.vars.outputs.sha_short }}"
+  zap_scan2:
+      runs-on: ubuntu-latest
+      name: Test
+      continue-on-error: true
+      steps:
+        - name: My step 2
+          run: echo Test1_${SHORT_SHA}
