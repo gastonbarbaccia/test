@@ -38,17 +38,15 @@ jobs:
 #   needs: Staging
     continue-on-error: true
     steps:
-      - uses: addnab/docker-run-action@v3
+      - name: ZAP Scan
+        uses: zaproxy/action-full-scan@v0.4.0
         with:
-          image: owasp/zap2docker-stable
-          run: |
-                mkdir /zap/wrk
-                /zap/zap-full-scan.py -t https://devsecops-test.herokuapp.com -x report_zap.xml || true
-                cp /zap/wrk/report_zap.xml .
-      - name: Upload image
-        uses: ishworkh/docker-image-artifact-upload@v1
-        with:
-          image: "owasp/zap2docker-stable"
+          docker_name: 'owasp/zap2docker-stable'
+          target: 'https://devsecops-test.herokuapp.com'
+          rules_file_name: '.zap/rules.tsv'
+          cmd_options: '-x'
+
+
 
 #      - name: Upload Test results
 #        uses: actions/upload-artifact@master
