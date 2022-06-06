@@ -44,11 +44,13 @@ jobs:
           run: |
                 mkdir /zap/wrk
                 /zap/zap-full-scan.py -t https://devsecops-test.herokuapp.com -x report_zap.xml || true
-      - name: Upload Test results
-        uses: actions/upload-artifact@master
-        with:
-           name: ZAP report
-           path: /wrk/report_zap.xml
+                cd /wrk
+                ls
+#      - name: Upload Test results
+#        uses: actions/upload-artifact@master
+#        with:
+#           name: ZAP report
+#           path: /wrk/report_zap.xml
 
 
 
