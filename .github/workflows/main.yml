@@ -27,4 +27,8 @@ jobs:
       uses: MobSF/mobsfscan@main
       with:
         args: '. --json --output results_mobile.json'
+    - uses: actions/upload-artifact@v3
+      with:
+        name: my-artifact
+        path: results_mobile.json
 
