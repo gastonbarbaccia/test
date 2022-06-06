@@ -27,6 +27,3 @@ jobs:
           uses: gastonbarbaccia/zapproxy@v0.1.1
           with:
             target: 'https://devsecops-test.herokuapp.com/'
-        - name: files
-          run: |   
-                ls
