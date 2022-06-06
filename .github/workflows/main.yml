@@ -21,7 +21,7 @@ jobs:
   zap_scan:
       runs-on: ubuntu-latest
       name: Scan ZAP website
-#      continue-on-error: true
+      continue-on-error: true
       steps:
         - name: ZAP Scan
           uses: gastonbarbaccia/zapproxy@v0.1.1
