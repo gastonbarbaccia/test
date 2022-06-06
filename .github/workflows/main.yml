@@ -27,7 +27,7 @@ jobs:
         - name: Add SHORT_SHA env property with commit short sha
           run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
         - name: My step 1
-          run: echo Test1_${SHORT_SHA}
+          run: echo Test1_#${SHORT_SHA}
 
   zap_scan2:
       runs-on: ubuntu-latest
@@ -37,4 +37,4 @@ jobs:
         - name: Add SHORT_SHA env property with commit short sha
           run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
         - name: My step 2
-          run: echo Test1_${SHORT_SHA}
+          run: echo Test1_#${SHORT_SHA}
