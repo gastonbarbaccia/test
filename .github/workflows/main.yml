@@ -49,7 +49,7 @@ jobs:
         id: extract
         with:
           image: owasp/zap2docker-stable
-          path: /zap/wrk/.
+          path: /zap/wrk/
       - name: Upload Test results
         uses: actions/upload-artifact@master
         with:
