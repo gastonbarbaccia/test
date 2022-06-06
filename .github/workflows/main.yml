@@ -41,6 +41,8 @@ jobs:
           runs-on: ubuntu-latest
           needs: SonarScanner
           steps:
+            - name: Checkout
+              uses: actions/checkout@v2
             - name: SHA-Branch
               id: vars
               shell: bash
@@ -71,6 +73,8 @@ jobs:
           runs-on: ubuntu-latest
           needs: EngagementSonarqube
           steps:
+            - name: Checkout
+              uses: actions/checkout@v2
             - name: SHA-Branch
               id: vars
               shell: bash
@@ -125,6 +129,8 @@ jobs:
           runs-on: ubuntu-latest
           needs: dependency_check
           steps:
+            - name: Checkout
+              uses: actions/checkout@v2
             - name: SHA-Branch
               id: vars
               shell: bash
@@ -155,6 +161,8 @@ jobs:
           runs-on: ubuntu-latest
           needs: EngagementDependencyCheck
           steps:
+            - name: Checkout
+              uses: actions/checkout@v2
             - name: SHA-Branch
               id: vars
               shell: bash
@@ -211,6 +219,8 @@ jobs:
           runs-on: ubuntu-latest
           needs: trivy
           steps:
+                - name: Checkout
+                  uses: actions/checkout@v2
                 - name: SHA-Branch
                   id: vars
                   shell: bash
@@ -241,6 +251,8 @@ jobs:
           runs-on: ubuntu-latest
           needs: EngagementTrivy
           steps:
+            - name: Checkout
+              uses: actions/checkout@v2
             - name: SHA-Branch
               id: vars
               shell: bash
@@ -287,6 +299,8 @@ jobs:
           runs-on: ubuntu-latest
           needs: mobsfscan
           steps:
+            - name: Checkout
+              uses: actions/checkout@v2
             - name: SHA-Branch
               id: vars
               shell: bash
@@ -318,6 +332,8 @@ jobs:
           runs-on: ubuntu-latest
           needs: EngagementMobsfscan
           steps:
+            - name: Checkout
+              uses: actions/checkout@v2
             - name: SHA-Branch
               id: vars
               shell: bash
