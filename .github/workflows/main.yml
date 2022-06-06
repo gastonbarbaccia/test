@@ -20,7 +20,7 @@ env:
 jobs:
   zap_scan:
       runs-on: ubuntu-latest
-      name: Test
+      name: Test 1
       continue-on-error: true
       steps:
         - uses: actions/checkout@v1
@@ -31,8 +31,10 @@ jobs:
 
   zap_scan2:
       runs-on: ubuntu-latest
-      name: Test
+      name: Test 2
       continue-on-error: true
       steps:
+        - name: Add SHORT_SHA env property with commit short sha
+          run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
         - name: My step 2
           run: echo Test1_${SHORT_SHA}
