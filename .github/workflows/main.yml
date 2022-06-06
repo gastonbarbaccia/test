@@ -24,7 +24,7 @@ jobs:
 #      continue-on-error: true
       steps:
         - name: ZAP Scan
-          uses: gastonbarbaccia/zapproxy@v0.1.0
+          uses: gastonbarbaccia/zapproxy@v0.1.1
           with:
             target: 'https://devsecops-test.herokuapp.com/'
             
