@@ -233,7 +233,7 @@ jobs:
                     -F "push_to_jira=false"
 
 
-  mobsfscan:
+  Mobsfscan:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
