@@ -1,5 +1,6 @@
 name: Code Scanning
 
+
 on:
   push:
     branches:
