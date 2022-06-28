@@ -370,6 +370,7 @@ jobs:
   DAST:
     runs-on: ubuntu-latest
     name: Scan the webapplication
+    needs: Staging
     steps:
       - name: Checkout
         uses: actions/checkout@v2
