@@ -87,7 +87,7 @@ jobs:
                     echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
             - uses: actions/download-artifact@v2
               with:
-                name: report_xml.xml
+                name: ZapProxyReport
             - name: Upload report
               run: |
                     curl -X POST '${{ env.DEFECTDOJO_SERVER }}/api/v2/import-scan/' \
