@@ -34,6 +34,10 @@ jobs:
           docker_name: 'owasp/zap2docker-stable'
           target: 'https://devsecops-test.herokuapp.com/'
           cmd_options: '-x report_xml'
+      - name: set release date
+        run: |
+          echo "RELEASE_DATE=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
+          echo ${{ env.RELEASE_DATE }}
       - name: Upload Test results
         uses: actions/upload-artifact@master
         with:
