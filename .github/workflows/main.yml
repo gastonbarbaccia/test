@@ -34,11 +34,6 @@ jobs:
           docker_name: 'owasp/zap2docker-stable'
           target: 'https://devsecops-test.herokuapp.com/'
           cmd_options: '-x report_xml'
-      - name: Get current date
-        id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
-      - name: Test with environment variables
-        run: echo ${{ steps.date.outputs.date }}
       - name: Upload Test results
         uses: actions/upload-artifact@master
         with:
@@ -59,6 +54,9 @@ jobs:
               run: |
                     echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
                     echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+            - name: Get current date
+              id: date
+              run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
             - name: Run the build process with Docker
               uses: addnab/docker-run-action@v3
               with:
@@ -73,8 +71,8 @@ jobs:
                         -d '{
                         "name":"DAST_#${{ steps.vars.outputs.sha_short }}_${{ steps.vars.outputs.branch }}",
                         "engagement_type": "CI/CD",
-                        "target_start": "2022-06-02",
-                        "target_end": "2022-06-02",
+                        "target_start": "${{ steps.date.outputs.date }}",
+                        "target_end": "${{ steps.date.outputs.date }}",
                         "product": 3
                         }'
   PublishFindingsDAST:
@@ -90,6 +88,9 @@ jobs:
               run: |
                     echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
                     echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+            - name: Get current date
+              id: date
+              run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
             - uses: actions/download-artifact@v2
               with:
                 name: ZapProxyReport
@@ -100,7 +101,7 @@ jobs:
                     -H  "Content-Type: multipart/form-data" \
                     -H  "X-CSRFToken: ujMSwx6OazuMFYFeovC7SFWNZ4MeCRS7dqRYTlAHYXBDCGvw5aoC2iWR9m5UCwts" \
                     -H "Authorization: Token 0dfc2ae06f011369f4eefbcf3e067efb9627ce09" \
-                    -F "scan_date=2022-06-02" \
+                    -F "scan_date=${{ steps.date.outputs.date }}" \
                     -F "minimum_severity=Info" \
                     -F "active=true" \
                     -F "verified=false" \
