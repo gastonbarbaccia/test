@@ -5,10 +5,12 @@ on:
     branches:
       - main
       - develop
+      - zap_proxy
   pull_request:
     branches:
       - main
       - develop
+      - zap_proxy
 
 env:
   GITHUB_TOKEN : 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
