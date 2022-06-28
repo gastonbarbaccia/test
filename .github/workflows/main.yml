@@ -31,7 +31,6 @@ jobs:
       - name: ZAP Scan
         uses: zaproxy/action-baseline@v0.6.1
         with:
-          token: ${{ secrets.SCANSECRET }}
           docker_name: 'owasp/zap2docker-stable'
           target: 'https://devsecops-test.herokuapp.com/'
           cmd_options: '-x report_xml'
